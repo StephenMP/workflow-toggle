@@ -58,14 +58,10 @@ export async function main(): Promise<void> {
       throw new Error(`${action} is an unsupported toggle action!`)
     }
   } catch (error) {
-    throw error
+    if (error instanceof Error) {
+      core.setFailed(error)
+    }
   }
 }
 
 main()
-  .then(() => core.info('Done :)'))
-  .catch(error => {
-    if (error instanceof Error) {
-      core.setFailed(error)
-    }
-  })

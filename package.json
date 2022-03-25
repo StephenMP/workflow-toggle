@@ -6,12 +6,10 @@
   "main": "lib/main.js",
   "scripts": {
     "build": "rimraf ./lib && tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
     "package": "rimraf ./dist && ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "all": "yarn build && yarn format && yarn lint && yarn package && yarn test"
+    "all": "yarn build && yarn lint && yarn package && yarn test"
   },
   "repository": {
     "type": "git",
