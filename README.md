@@ -5,7 +5,7 @@ This action allows you to enable/disable a GitHub Actions Workflow.
 ### Usage
 ```yaml
 - name: Toggle Workflow
-  uses: actions/cache@v3
+  uses: StephenMP/workflow-toggle@v1
   with:
     token: ${{ secrets.YOUR_GITHUB_TOKEN }}
     workflow_id: YourWorkflow.yaml
