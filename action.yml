@@ -1,8 +1,9 @@
 name: 'Workflow Toggle'
 description: 'GitHub Action to Enable/Disable GitHub Actions Workflows'
 author: 'StephenMP'
-color: purple
-icon: toggle-left
+branding:
+  color: purple
+  icon: toggle-left
 inputs:
   # Required
   token:
