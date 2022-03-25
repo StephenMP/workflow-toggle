@@ -11,7 +11,7 @@
     "lint": "eslint src/**/*.ts",
     "package": "rimraf ./dist && ncc build --source-map --license licenses.txt",
     "test": "jest",
-    "all": "yarn build && yarn format && yarn lint && yarn package && npm test"
+    "all": "yarn build && yarn format && yarn lint && yarn package && yarn test"
   },
   "repository": {
     "type": "git",
