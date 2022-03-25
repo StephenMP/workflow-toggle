@@ -1,9 +1,10 @@
 name: Manual Test
 on:
   workflow_dispatch:
-    action:
-      description: 'enable or disable'
-      required: true
+    inputs:
+      action:
+        description: 'enable or disable'
+        required: true
 
 jobs:
   test: # make sure the action works on a clean machine without building
