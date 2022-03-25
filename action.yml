@@ -1,11 +1,28 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Workflow Toggle'
+description: 'GitHub Action to Enable/Disable GitHub Actions Workflows'
+author: 'StephenMP'
 inputs:
-  milliseconds: # change this
+  # Required
+  token:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'A GitHub access token with the "workflow" scope'
+
+  workflow_id:
+    required: true
+    description: 'The workflow file name or the workflow ID'
+
+  action:
+    required: true
+    description: 'Either "enable" or "disable" to enable/disable the workflow'
+
+  # Optional
+  owner:
+    required: false
+    description: 'The repo owner (defaults to owner of the running action)'
+
+  repo:
+    required: false
+    description: 'The repo with the workflow to disable (defaults to repo of the running action)'
 runs:
   using: 'node16'
   main: 'dist/index.js'
