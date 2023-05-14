@@ -9,9 +9,6 @@ export class ActionRunner {
 
   public async run(inputs: Inputs) {
     const { action, owner, repo, workflow_id } = inputs;
-    const result = await this.workflowClient.toggleWorkflow(owner, repo, workflow_id, action);
-    if (!result.success) {
-      setFailed(result.message ?? 'Something went wrong');
-    }
+    return await this.workflowClient.toggleWorkflow(owner, repo, workflow_id, action);
   }
 }

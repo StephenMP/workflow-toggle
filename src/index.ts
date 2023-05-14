@@ -1,3 +1,4 @@
+import { setFailed } from '@actions/core';
 import { getOctokit } from '@actions/github';
 import 'reflect-metadata';
 import { container } from 'tsyringe';
@@ -6,12 +7,11 @@ import { WorkflowClient } from './lib/WorkflowClient';
 import { parseInputs } from './lib/input';
 import { logger } from './lib/logger';
 import { Octokit } from './lib/types';
-import { setFailed } from '@actions/core';
 
 async function main() {
-  logger.info('========================');
-  logger.info('Beginning Rerun Workflow');
-  logger.info('========================\n');
+  logger.info('=========================');
+  logger.info('Beginning Workflow Toggle');
+  logger.info('=========================\n');
 
   // Get inputs necessary to register services for DI
   const inputs = parseInputs();
@@ -23,16 +23,22 @@ async function main() {
     .registerSingleton<ActionRunner>(ActionRunner);
 
   // Execute action
-  return await container.resolve(ActionRunner).run(inputs);
+  const result = await container.resolve(ActionRunner).run(inputs);
+  if (!result.success) {
+    throw new Error(result.message);
+  }
 }
 
 main()
   .then(() => {
-    logger.info('=======================');
-    logger.info('Finished Rerun Workflow');
-    logger.info('=======================');
+    logger.info('========================');
+    logger.info('Finished Workflow Toggle');
+    logger.info('========================');
   })
   .catch((e: Error) => {
+    logger.info('======================');
+    logger.info('Failed Workflow Toggle');
+    logger.info('======================');
     logger.error(e);
     setFailed(e);
   });
