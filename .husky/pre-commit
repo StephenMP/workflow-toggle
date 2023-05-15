@@ -3,11 +3,7 @@
 
 function buildActions() {
     yarn install &>/dev/null
-
-    yarn bootstrap &>/dev/null
-
     yarn build || exit 1
-
     echo "true" >>.github/change-detection
 }
 

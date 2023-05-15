@@ -8,7 +8,7 @@ import { parseInputs } from './lib/input';
 import { logger } from './lib/logger';
 import { Octokit } from './lib/types';
 
-async function main() {
+export async function main() {
   logger.info('=========================');
   logger.info('Beginning Workflow Toggle');
   logger.info('=========================\n');

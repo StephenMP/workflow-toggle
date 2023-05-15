@@ -41,7 +41,7 @@ var Logger = (function () {
     Logger.prototype.info = function (message) {
         core.info(message);
     };
-    Logger.prototype.warn = function (message, properties) {
+    Logger.prototype.warning = function (message, properties) {
         core.warning(message, properties);
     };
     Logger.prototype.error = function (message, properties) {

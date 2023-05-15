@@ -48,26 +48,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActionRunner = void 0;
 var tsyringe_1 = require("tsyringe");
 var WorkflowClient_1 = require("./WorkflowClient");
-var core_1 = require("@actions/core");
 var ActionRunner = exports.ActionRunner = (function () {
     function ActionRunner(workflowClient) {
         this.workflowClient = workflowClient;
     }
     ActionRunner.prototype.run = function (inputs) {
-        var _a;
         return __awaiter(this, void 0, void 0, function () {
-            var action, owner, repo, workflow_id, result;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var action, owner, repo, workflow_id;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         action = inputs.action, owner = inputs.owner, repo = inputs.repo, workflow_id = inputs.workflow_id;
                         return [4, this.workflowClient.toggleWorkflow(owner, repo, workflow_id, action)];
-                    case 1:
-                        result = _b.sent();
-                        if (!result.success) {
-                            (0, core_1.setFailed)((_a = result.message) !== null && _a !== void 0 ? _a : 'Something went wrong');
-                        }
-                        return [2];
+                    case 1: return [2, _a.sent()];
                 }
             });
         });

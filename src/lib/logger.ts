@@ -4,7 +4,7 @@ import { failWhale } from 'fail-whale';
 export interface ILogger {
   debug(message: string): void;
   info(message: string): void;
-  warn(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
+  warning(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
   error(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
   notice(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
   group<T>(name: string, fn: () => Promise<T>): Promise<T>;
@@ -33,7 +33,7 @@ export class Logger implements ILogger {
     core.info(message);
   }
 
-  public warn(message: string | Error, properties?: core.AnnotationProperties | undefined) {
+  public warning(message: string | Error, properties?: core.AnnotationProperties | undefined) {
     core.warning(message, properties);
   }
 

@@ -2,7 +2,7 @@ import * as core from '@actions/core';
 export interface ILogger {
     debug(message: string): void;
     info(message: string): void;
-    warn(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
+    warning(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     error(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     notice(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     group<T>(name: string, fn: () => Promise<T>): Promise<T>;
@@ -16,7 +16,7 @@ export declare class Logger implements ILogger {
     private constructor();
     debug(message: string): void;
     info(message: string): void;
-    warn(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
+    warning(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     error(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     notice(message: string | Error, properties?: core.AnnotationProperties | undefined): void;
     group<T>(name: string, fn: () => Promise<T>): Promise<T>;
