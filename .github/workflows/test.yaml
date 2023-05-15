@@ -13,11 +13,16 @@ jobs:
     steps:
       - name: Checkout Source Files
         uses: actions/checkout@v2
-      
+
       - name: Build and Test
         run: |
           yarn install
           yarn all
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          path-to-lcov: './reports/coverage/lcov.info'
 
       - name: Test Disable
         uses: ./
