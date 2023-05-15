@@ -1,0 +1,42 @@
+#!/bin/bash
+. "$(dirname -- "$0")/_/husky.sh"
+
+function buildActions() {
+    yarn install &>/dev/null
+
+    yarn bootstrap &>/dev/null
+
+    yarn build || exit 1
+
+    echo "true" >>.github/change-detection
+}
+
+function trackChanges() {
+    git add ./src
+    git add ./dist
+}
+
+function checkForChanges() {
+    if [[ $(git diff --cached --exit-code ./src) ]]
+    then
+        return 1
+    else
+        return 0
+    fi
+}
+
+function main() {
+    echo "=========="
+    echo "Pre-commit"
+    echo "=========="
+
+    npx lint-staged
+    (checkForChanges && echo "→ No changes to actions") || (echo "→ Changes detected to actions" && buildActions)
+    trackChanges
+
+    echo
+    echo "All Done"
+    echo "=========="
+}
+
+main

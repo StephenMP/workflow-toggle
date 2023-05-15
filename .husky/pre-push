@@ -1,0 +1,64 @@
+#!/bin/bash
+. "$(dirname -- "$0")/_/husky.sh"
+
+#############
+# Functions #
+#############
+function failWhale() {
+    local NC='\033[0m'
+    local RED='\033[0;31m'
+
+    echo -e "${RED}"
+    echo -e "▄████████████▄▐█▄▄▄▄█▌"
+    echo -e "█████▌▄▌▄▐▐▌██▌▀▀██▀▀"
+    echo -e "███▄█▌▄▌▄▐▐▌▀██▄▄█▌"
+    echo -e "▄▄▄▄█████████████"
+    echo
+    echo "Your tests failed :("
+    echo -e "${NC}"
+    echo "========"
+    exit 1
+}
+
+function testIt()
+{
+    echo "Excuting tests"
+    yarn test || failWhale
+}
+
+
+function killjobs () {
+    local jobs="$(jobs -p)"
+    if [ -n "${jobs}" ]
+    then
+        kill -KILL ${jobs};
+    fi
+}
+
+function handleSignals()
+{
+    killjobs
+    exit
+}
+
+function main()
+{
+    echo "========"
+    echo "Pre-push"
+    echo "========"
+    trap handleSignals SIGINT SIGQUIT SIGABRT SIGKILL SIGTERM
+
+    if [ -f ".github/change-detection" ]
+    then
+        testIt
+        rm -rf .github/change-detection
+    else
+        echo "No changes to actions"
+    fi
+
+    echo
+    echo "All Done"
+    echo "========"
+}
+
+main
